@@ -14,7 +14,32 @@ class LoginPageLocators:
     LOGIN_VK = (By.XPATH, '//*[@data-l="t,vkc"]')
     LOGIN_MAIL = (By.XPATH, '//*[@data-l="t,mailru"]')
     LOGIN_YANDEX = (By.XPATH, '//*[@data-l="t,yandex"]')
+    ERROR_TEXT = (By.XPATH, '//*[@class="input-e login_error"]')
 
 
 class LoginPageHelper(BasePage):
-    pass
+    def __init__(self, driver):
+        self.driver = driver
+        self.check_page()
+
+    def check_page(self):
+        self.find_element(LoginPageLocators.LOGIN_TAB)
+        self.find_element(LoginPageLocators.LOGIN_TAB_QR)
+        self.find_element(LoginPageLocators.LOGIN_FIELD)
+        self.find_element(LoginPageLocators.PASSWORD_FIELD)
+        self.find_element(LoginPageLocators.LOGIN_BUTTON)
+        self.find_element(LoginPageLocators.LOGIN_BUTTON_QR)
+        self.find_element(LoginPageLocators.PASSWORD_FORGOT)
+        self.find_element(LoginPageLocators.REGISTER_BUTTON)
+        self.find_element(LoginPageLocators.LOGIN_VK)
+        self.find_element(LoginPageLocators.LOGIN_MAIL)
+        self.find_element(LoginPageLocators.LOGIN_YANDEX)
+
+    def click_login(self):
+        self.find_element(LoginPageLocators.LOGIN_BUTTON).click()
+
+    def get_error_text(self):
+        return self.find_element(LoginPageLocators.ERROR_TEXT).text
+
+    def input_login(self, text):
+        return self.find_element(LoginPageLocators.LOGIN_FIELD).send_keys(text)
