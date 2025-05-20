@@ -1,5 +1,6 @@
 from pages.BasePage import BasePage
 from selenium.webdriver.common.by import By
+import allure
 
 
 class LoginPageLocators:
@@ -35,11 +36,17 @@ class LoginPageHelper(BasePage):
         self.find_element(LoginPageLocators.LOGIN_MAIL)
         self.find_element(LoginPageLocators.LOGIN_YANDEX)
 
+    @allure.step('Нажимаем кнопку "Войти"')
     def click_login(self):
+        self.attach_screenshot()
         self.find_element(LoginPageLocators.LOGIN_BUTTON).click()
 
+    @allure.step('Получаем текст ошибки')
     def get_error_text(self):
+        self.attach_screenshot()
         return self.find_element(LoginPageLocators.ERROR_TEXT).text
 
+    @allure.step('Вводим текст в поле логин')
     def input_login(self, text):
-        return self.find_element(LoginPageLocators.LOGIN_FIELD).send_keys(text)
+        self.find_element(LoginPageLocators.LOGIN_FIELD).send_keys(text)
+        self.attach_screenshot()
