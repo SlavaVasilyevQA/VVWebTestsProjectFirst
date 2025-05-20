@@ -46,7 +46,7 @@ class LoginPageHelper(BasePage):
         self.attach_screenshot()
         return self.find_element(LoginPageLocators.ERROR_TEXT).text
 
-    @allure.step('Вводим текст в поле логин')
-    def input_login(self, text):
-        self.find_element(LoginPageLocators.LOGIN_FIELD).send_keys(text)
+    @allure.step('Заполняем поле логин')
+    def input_login(self, login):
+        self.find_element(LoginPageLocators.LOGIN_FIELD).send_keys(login)
         self.attach_screenshot()
